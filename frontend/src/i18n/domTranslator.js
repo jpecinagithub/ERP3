@@ -126,7 +126,7 @@ const SPANISH_TO_ENGLISH_PHRASES = {
   'Fecha de Inicio': 'Start Date',
   'Fecha de Fin': 'End Date',
   'Asientos Contables': 'Journal Entries',
-  'Registro de movimientos contables': 'Accounting entries register',
+  'Registro de movimientos contables': 'Journal entries register',
   'Plantillas': 'Templates',
   'Nuevo Asiento': 'New Entry',
   'Filtrar': 'Filter',
@@ -296,6 +296,8 @@ const applyCase = (source, translated) => {
 const applyRegexRules = (text) => {
   let result = text;
 
+  result = result.replace(/^Asientos\s+Contables$/i, 'Journal Entries');
+  result = result.replace(/^Journal Entries\s+Contables$/i, 'Journal Entries');
   result = result.replace(/^Bienvenido de nuevo,\s*(.+)$/i, (_, name) => `Welcome back, ${name}`);
   result = result.replace(/^Asiento\s+#?(\d+)$/i, (_, id) => `Entry #${id}`);
   result = result.replace(/^Factura\s+(.+)$/i, (_, number) => `Invoice ${number}`);
