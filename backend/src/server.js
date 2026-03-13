@@ -1,9 +1,8 @@
 import { testConnection, closePool } from './config/database.js';
 import app from './app.js';
 
-const isProduction = process.env.NODE_ENV === 'production';
 const HOST = '0.0.0.0';
-const PORT = Number(process.env.PORT) || (isProduction ? 80 : 3000);
+const PORT = Number(process.env.PORT) || 80;
 
 // Start server
 const server = app.listen(PORT, HOST, async () => {

@@ -11,16 +11,40 @@ import salesFlowRoutes from './routes/salesFlowRoutes.js';
 import treasuryRoutes from './routes/treasuryRoutes.js';
 import fixedAssetRoutes from './routes/fixedAssetRoutes.js';
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const app = express();
 
-const normalizeOrigin = (origin) => origin.trim().replace(/\/+$/, '');
+const normalizeOrigin = (origin) =>
+  origin.trim().replace(/^['"]|['"]$/g, '').replace(/\/+$/, '');
+
+const isWildcardPattern = (value) => value.startsWith('*.');
+
+const matchesWildcard = (origin, pattern) => {
+  const suffix = pattern.slice(1); // ".example.com"
+  return origin.endsWith(suffix);
+};
 
 const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
   .split(',')
   .map((origin) => normalizeOrigin(origin))
   .filter(Boolean);
+
+const isOriginAllowed = (origin) => {
+  if (allowedOrigins.includes('*')) {
+    return true;
+  }
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  return allowedOrigins
+    .filter((value) => isWildcardPattern(value))
+    .some((pattern) => matchesWildcard(origin, pattern));
+};
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -30,13 +54,15 @@ const corsOptions = {
     }
 
     const normalizedOrigin = normalizeOrigin(origin);
-    if (allowedOrigins.includes(normalizedOrigin)) {
+    if (isOriginAllowed(normalizedOrigin)) {
       return callback(null, true);
     }
 
+    console.error('CORS blocked origin:', normalizedOrigin, 'Allowed:', allowedOrigins);
     return callback(new Error(`CORS blocked for origin: ${origin}`));
   },
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
