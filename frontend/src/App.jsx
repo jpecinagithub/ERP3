@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Login from './components/auth/Login';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Layout from './components/layout/Layout';
@@ -41,6 +42,7 @@ import { useState, useEffect } from 'react';
 
 const Dashboard = () => {
   const { user } = useAuthContext();
+  const { language } = useLanguage();
   const [kpis, setKpis] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -62,13 +64,17 @@ const Dashboard = () => {
   }, []);
 
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('es-ES', { 
+    return new Intl.NumberFormat(language === 'es' ? 'es-ES' : 'en-US', {
       style: 'currency', 
       currency: 'EUR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(value || 0);
   };
+
+  const monthLabels = language === 'es'
+    ? ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct']
+    : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
 
   const kpisData = loading ? [
     { title: 'Total Ventas', value: '...', icon: 'trending_up', color: 'text-primary' },
@@ -116,14 +122,14 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 glass p-8 rounded-2xl">
-          <h4 className="text-xl font-bold text-white mb-6">Monthly Sales Revenue</h4>
+          <h4 className="text-xl font-bold text-white mb-6">{language === 'es' ? 'Ingresos Mensuales por Ventas' : 'Monthly Sales Revenue'}</h4>
           <div className="relative h-80 flex items-end justify-between gap-4 px-2">
             <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="border-b border-slate-800/50 w-full h-px"></div>
               ))}
             </div>
-            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'].map((month) => (
+            {monthLabels.map((month) => (
               <div key={month} className="flex-1 flex flex-col items-center gap-2 z-10">
                 <div 
                   className="chart-bar w-full rounded-t-lg transition-all hover:brightness-125" 
@@ -249,9 +255,11 @@ const AppRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </LanguageProvider>
     </BrowserRouter>
   );
 }

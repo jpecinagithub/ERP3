@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -24,6 +25,8 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-6">
+        <LanguageSwitcher />
+
         <button className="relative p-2 text-slate-400 hover:text-slate-100 transition-colors">
           <span className="material-symbols-outlined text-2xl">notifications</span>
           <span className="absolute top-2 right-2 size-2.5 bg-red-500 border-2 border-[#101622] rounded-full"></span>

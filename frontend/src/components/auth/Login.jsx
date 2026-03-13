@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -41,6 +42,7 @@ const Login = () => {
           </div>
           <h2 className="text-xl font-bold tracking-tight text-white">ERP Enterprise</h2>
         </div>
+        <LanguageSwitcher />
       </header>
 
       <main className="relative z-10 flex-1 flex items-center justify-center p-6">
