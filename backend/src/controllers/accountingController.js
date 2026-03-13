@@ -1279,11 +1279,15 @@ export const getJournalEntries = async (req, res) => {
 
     let sql = `
       SELECT je.id, je.entry_date, je.description, je.source_document_type, 
-             je.source_document_id, je.status, je.created_by
+             je.source_document_id, je.status, je.created_by,
+             COALESCE(SUM(jel.debit), 0) as total_debit,
+             COALESCE(SUM(jel.credit), 0) as total_credit
       FROM journal_entries je
+      LEFT JOIN journal_entry_lines jel ON jel.journal_entry_id = je.id
       WHERE 1=1
     `;
     const params = [];
+    const havingClauses = [];
 
     if (startDate) {
       sql += ` AND je.entry_date >= ?`;
@@ -1301,41 +1305,39 @@ export const getJournalEntries = async (req, res) => {
     }
 
     if (minAmount) {
-      sql += ` AND (SELECT SUM(debit) FROM journal_entry_lines WHERE journal_entry_id = je.id) >= ?`;
-      params.push(minAmount);
+      havingClauses.push(`COALESCE(SUM(jel.debit), 0) >= ?`);
+      params.push(Number(minAmount));
     }
 
     if (maxAmount) {
-      sql += ` AND (SELECT SUM(debit) FROM journal_entry_lines WHERE journal_entry_id = je.id) <= ?`;
-      params.push(maxAmount);
+      havingClauses.push(`COALESCE(SUM(jel.debit), 0) <= ?`);
+      params.push(Number(maxAmount));
+    }
+
+    sql += `
+      GROUP BY 
+        je.id, je.entry_date, je.description, je.source_document_type,
+        je.source_document_id, je.status, je.created_by
+    `;
+
+    if (havingClauses.length > 0) {
+      sql += ` HAVING ${havingClauses.join(' AND ')}`;
     }
 
     sql += ` ORDER BY je.entry_date DESC, je.id DESC`;
 
     const entries = await query(sql, params);
 
-    const entriesWithTotals = await Promise.all(
-      entries.map(async (entry) => {
-        const totals = await query(
-          `SELECT 
-            SUM(debit) as total_debit, 
-            SUM(credit) as total_credit
-           FROM journal_entry_lines
-           WHERE journal_entry_id = ?`,
-          [entry.id]
-        );
-        return {
-          id: entry.id,
-          entryDate: entry.entry_date,
-          description: entry.description,
-          sourceDocumentType: entry.source_document_type,
-          sourceDocumentId: entry.source_document_id,
-          status: entry.status,
-          totalDebit: parseFloat(totals[0].total_debit) || 0,
-          totalCredit: parseFloat(totals[0].total_credit) || 0
-        };
-      })
-    );
+    const entriesWithTotals = entries.map((entry) => ({
+      id: entry.id,
+      entryDate: entry.entry_date,
+      description: entry.description,
+      sourceDocumentType: entry.source_document_type,
+      sourceDocumentId: entry.source_document_id,
+      status: entry.status,
+      totalDebit: parseFloat(entry.total_debit) || 0,
+      totalCredit: parseFloat(entry.total_credit) || 0
+    }));
 
     res.json({
       success: true,

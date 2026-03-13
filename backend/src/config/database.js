@@ -6,6 +6,11 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Database configuration
+const parsedConnectionLimit = parseInt(process.env.DB_CONNECTION_LIMIT, 10);
+const connectionLimit = Number.isInteger(parsedConnectionLimit) && parsedConnectionLimit > 0
+  ? parsedConnectionLimit
+  : 4;
+
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT) || 3306,
@@ -13,7 +18,7 @@ const dbConfig = {
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'erp_contable',
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit,
   queueLimit: 0,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0
