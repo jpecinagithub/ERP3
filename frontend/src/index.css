@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #1a2236, #101622);
+  color: #e2e8f0;
+}
+
+#root {
+  color: inherit;
+}
+
+/* Global readability guardrail for dark UI:
+   force text/inputs/placeholders to light palette */
+:where(input, textarea, select) {
+  color: #e2e8f0;
+}
+
+:where(input, textarea, select)::placeholder {
+  color: #94a3b8;
+}
+
+:where(select option) {
+  color: #e2e8f0;
+  background-color: #0f172a;
+}
+
+/* Date/time picker icons should follow light input text style */
+:where(
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="time"]
+) {
+  color-scheme: dark;
+}
+
+:where(
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="time"]
+)::-webkit-calendar-picker-indicator {
+  filter: brightness(0) saturate(100%) invert(85%) sepia(10%) saturate(348%) hue-rotate(176deg) brightness(97%) contrast(91%);
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+:where(
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="time"]
+)::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Override legacy dark text utility classes that become unreadable */
+.text-black,
+.text-gray-900,
+.text-gray-800,
+.text-gray-700,
+.text-gray-600,
+.text-slate-900,
+.text-slate-800,
+.text-slate-700,
+.text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+.glass {
+  background: rgba(22, 27, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-active {
+  background: linear-gradient(90deg, rgba(19, 91, 236, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-left: 3px solid #135bec;
+}
+
+.gradient-button {
+  background: linear-gradient(135deg, #135bec 0%, #8b5cf6 100%);
+}
+
+.chart-bar {
+  background: linear-gradient(180deg, #135bec 0%, #8b5cf6 100%);
+}

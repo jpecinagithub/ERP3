@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium ERP - Asientos Contables</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0a0e17",
+                        "surface": "#161d2b",
+                        "border-color": "#232d3f"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(22, 29, 43, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232d3f;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-72 bg-slate-50 dark:bg-surface border-r border-slate-200 dark:border-border-color flex flex-col h-screen shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h1 class="text-lg font-bold tracking-tight">Premium ERP</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Enterprise Edition</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+<div class="px-3 py-2 text-[10px] uppercase font-bold text-slate-400 tracking-widest mb-2">General</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Tablero</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white shadow-md shadow-primary/20" href="#">
+<span class="material-symbols-outlined text-[22px]">book</span>
+<span class="text-sm font-medium">Asientos Contables</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+<span class="text-sm font-medium">Libro Mayor</span>
+</a>
+<div class="px-3 py-2 text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-6 mb-2">Finanzas</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">balance</span>
+<span class="text-sm font-medium">Balance General</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">analytics</span>
+<span class="text-sm font-medium">Reportes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-medium">Configuración</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-border-color">
+<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-100 dark:bg-slate-800/50">
+<div class="size-8 rounded-full bg-slate-300" data-alt="User profile avatar"></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Admin User</p>
+<p class="text-[10px] text-slate-500">Finance Manager</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto custom-scrollbar bg-gradient-to-br from-background-light to-slate-200 dark:from-background-dark dark:to-[#0f172a] p-8">
+<!-- Header Section -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+<div>
+<h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Libro Diario</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Gestión avanzada de asientos contables corporativos.</p>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-purple-600 text-white font-bold text-sm shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Nuevo Asiento
+            </button>
+</div>
+<!-- Table View (Glassmorphism) -->
+<div class="glass-panel rounded-2xl overflow-hidden mb-8 border border-slate-200 dark:border-border-color shadow-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-100/50 dark:bg-slate-800/40 border-b border-slate-200 dark:border-border-color">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">ID de Asiento</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Fecha</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Descripción</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Doc. Origen</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-border-color">
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-sm font-semibold text-primary">AS-2023-001</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">24 Oct 2023</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">Pago de Servicios Básicos - Oficina Central</td>
+<td class="px-6 py-4 text-sm">
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium">FAC-552</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-sm font-semibold text-primary">AS-2023-002</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">24 Oct 2023</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">Venta de Mercaderías - Cliente Premium Corp</td>
+<td class="px-6 py-4 text-sm">
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium">NV-881</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 text-sm font-semibold text-primary">AS-2023-003</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">25 Oct 2023</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">Ajuste por Depreciación Mensual - Activos Fijos</td>
+<td class="px-6 py-4 text-sm">
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium">AJ-004</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Detail Form Card -->
+<div class="glass-panel rounded-2xl p-8 border border-slate-200 dark:border-border-color shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<span class="flex items-center gap-1 text-emerald-500 font-bold text-xs bg-emerald-500/10 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                    Balance Cuadrado
+                </span>
+</div>
+<h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_document</span>
+                Detalle de Nuevo Asiento
+            </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase text-slate-500 tracking-wider">Fecha de Registro</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-border-color rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all text-slate-600 dark:text-slate-300 outline-none" type="date"/>
+</div>
+</div>
+<div class="md:col-span-2 flex flex-col gap-2">
+<label class="text-xs font-bold uppercase text-slate-500 tracking-wider">Descripción General</label>
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-border-color rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all text-slate-600 dark:text-slate-300 outline-none" placeholder="Ej: Registro de nómina mensual administrativa..." type="text"/>
+</div>
+</div>
+<!-- Lines Table -->
+<div class="border border-slate-200 dark:border-border-color rounded-xl overflow-hidden mb-6">
+<table class="w-full">
+<thead class="bg-slate-50 dark:bg-slate-800/40">
+<tr>
+<th class="px-4 py-3 text-xs font-bold text-slate-500 uppercase text-left w-1/3 tracking-widest">Cuenta Contable</th>
+<th class="px-4 py-3 text-xs font-bold text-slate-500 uppercase text-left tracking-widest">Descripción Línea</th>
+<th class="px-4 py-3 text-xs font-bold text-slate-500 uppercase text-right w-32 tracking-widest">Debe</th>
+<th class="px-4 py-3 text-xs font-bold text-slate-500 uppercase text-right w-32 tracking-widest">Haber</th>
+<th class="px-4 py-3 text-xs font-bold text-slate-500 uppercase text-center w-12 tracking-widest"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-border-color">
+<!-- Line 1 -->
+<tr class="bg-white/5">
+<td class="p-2">
+<select class="w-full bg-transparent border-none text-sm text-slate-600 dark:text-slate-300 focus:ring-0">
+<option>101.01 - Caja General</option>
+<option>102.01 - Banco Nacional CC</option>
+<option>401.01 - Ventas Gravadas</option>
+</select>
+</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-sm text-slate-600 dark:text-slate-300 focus:ring-0" type="text" value="Ingreso por venta contado"/>
+</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-sm text-right text-slate-600 dark:text-slate-300 font-semibold focus:ring-0" type="number" value="1500.00"/>
+</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-sm text-right text-slate-600 dark:text-slate-300 font-semibold focus:ring-0" type="number" value="0.00"/>
+</td>
+<td class="p-2 text-center">
+<button class="text-slate-400 hover:text-red-500"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</td>
+</tr>
+<!-- Line 2 -->
+<tr class="bg-white/5">
+<td class="p-2">
+<select class="w-full bg-transparent border-none text-sm text-slate-600 dark:text-slate-300 focus:ring-0">
+<option>401.01 - Ventas Gravadas</option>
+<option>101.01 - Caja General</option>
+<option>102.01 - Banco Nacional CC</option>
+</select>
+</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-sm text-slate-600 dark:text-slate-300 focus:ring-0" type="text" value="Venta de productos terminados"/>
+</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-sm text-right text-slate-600 dark:text-slate-300 font-semibold focus:ring-0" type="number" value="0.00"/>
+</td>
+<td class="p-2">
+<input class="w-full bg-transparent border-none text-sm text-right text-slate-600 dark:text-slate-300 font-semibold focus:ring-0" type="number" value="1500.00"/>
+</td>
+<td class="p-2 text-center">
+<button class="text-slate-400 hover:text-red-500"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</td>
+</tr>
+</tbody>
+<tfoot class="bg-slate-50 dark:bg-slate-800/20 font-bold border-t border-slate-200 dark:border-border-color">
+<tr>
+<td class="px-4 py-4 text-right text-sm text-slate-500 uppercase" colspan="2">Totales del Asiento</td>
+<td class="px-4 py-4 text-right text-sm text-primary">$ 1,500.00</td>
+<td class="px-4 py-4 text-right text-sm text-primary">$ 1,500.00</td>
+<td></td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-4">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-bold">
+<span class="material-symbols-outlined">add_circle</span>
+                    Agregar Nueva Línea
+                </button>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2.5 rounded-xl border border-slate-200 dark:border-border-color text-slate-600 dark:text-slate-400 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        Cancelar
+                    </button>
+<button class="flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-sm shadow-xl shadow-primary/30 hover:scale-[1.02] transition-transform active:scale-95">
+<span class="material-symbols-outlined">save</span>
+                        Guardar Asiento Contable
+                    </button>
+</div>
+</div>
+</div>
+<!-- Extra Info Footer -->
+<div class="mt-8 flex flex-wrap gap-6">
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-xs text-primary font-medium leading-tight">El sistema valida automáticamente que el balance entre Debe y Haber sea exacto antes de permitir el guardado.</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-border-color">
+<span class="material-symbols-outlined text-slate-400">history</span>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium leading-tight">Última sincronización con Libro Mayor: Hace 2 minutos.</p>
+</div>
+</div>
+</main>
+</body></html>

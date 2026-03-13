@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium ERP Enterprise Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-morphism {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bg-gradient-mesh {
+            background-color: #101622;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(19, 91, 236, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(147, 51, 234, 0.1) 0px, transparent 50%);
+        }
+        .particle-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Subtle Background Elements -->
+<div class="fixed inset-0 z-0 bg-gradient-mesh"></div>
+<div class="fixed inset-0 z-0 particle-pattern opacity-50"></div>
+<!-- Navigation -->
+<header class="relative z-10 w-full px-6 py-4 flex items-center justify-between border-b border-white/5 bg-background-dark/20 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined block" style="font-size: 24px;">hub</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-100">ERP Enterprise</h2>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+            Contact Support
+        </button>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex-1 flex items-center justify-center p-6">
+<div class="w-full max-w-[460px]">
+<!-- Login Card -->
+<div class="glass-morphism rounded-xl p-8 shadow-2xl border border-white/10">
+<div class="text-center mb-8">
+<div class="inline-flex items-center justify-center size-16 mb-4 rounded-2xl bg-gradient-to-tr from-primary to-purple-600 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-3xl">token</span>
+</div>
+<h1 class="text-3xl font-bold tracking-tight text-white mb-2">Bienvenido</h1>
+<p class="text-slate-400 text-sm">Accede a tu panel de gestión corporativa</p>
+</div>
+<form class="space-y-6">
+<!-- Username Field -->
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-300 block ml-1">Usuario</label>
+<div class="relative flex items-center group">
+<span class="material-symbols-outlined absolute left-4 text-slate-500 group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-slate-900/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-slate-600" placeholder="Ingresa tu usuario" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex items-center justify-between ml-1">
+<label class="text-sm font-medium text-slate-300 block">Contraseña</label>
+</div>
+<div class="relative flex items-center group">
+<span class="material-symbols-outlined absolute left-4 text-slate-500 group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-slate-900/50 border border-slate-700/50 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-slate-600" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Remember Me & Forgot Password -->
+<div class="flex items-center justify-between px-1">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary/50 focus:ring-offset-slate-900" type="checkbox"/>
+<span class="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">Recuérdame</span>
+</label>
+<a class="text-sm font-medium text-primary hover:text-primary/80 transition-colors" href="#">¿Olvidaste tu contraseña?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-700 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/30 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                        Iniciar Sesión
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+<!-- Additional Info -->
+<div class="mt-8 pt-6 border-t border-white/5 text-center">
+<p class="text-slate-500 text-xs leading-relaxed">
+                        Sistema de Planificación de Recursos Empresariales v4.2.0<br/>
+                        © 2024 ERP Enterprise Solutions. Todos los derechos reservados.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative z-10 w-full p-8 text-center">
+<div class="flex items-center justify-center gap-6">
+<a class="text-slate-500 hover:text-slate-300 text-xs transition-colors" href="#">Términos de Servicio</a>
+<div class="w-1 h-1 rounded-full bg-slate-700"></div>
+<a class="text-slate-500 hover:text-slate-300 text-xs transition-colors" href="#">Política de Privacidad</a>
+<div class="w-1 h-1 rounded-full bg-slate-700"></div>
+<a class="text-slate-500 hover:text-slate-300 text-xs transition-colors" href="#">Seguridad</a>
+</div>
+</footer>
+</body></html>
