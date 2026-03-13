@@ -1,12 +1,15 @@
 import { testConnection, closePool } from './config/database.js';
 import app from './app.js';
-const PORT = process.env.PORT || 3000;
+
+const isProduction = process.env.NODE_ENV === 'production';
+const HOST = process.env.HOST || '0.0.0.0';
+const PORT = Number(process.env.PORT) || (isProduction ? 80 : 3000);
 
 // Start server
-const server = app.listen(PORT, async () => {
-  console.log(`Server running on port ${PORT}`);
+const server = app.listen(PORT, HOST, async () => {
+  console.log(`Server running on ${HOST}:${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`Health check: http://localhost:${PORT}/health`);
+  console.log(`Health check: http://${HOST}:${PORT}/health`);
   
   // Test database connection on startup
   try {

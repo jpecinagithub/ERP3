@@ -41,6 +41,13 @@ app.get('/health', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'ERP Contable API is running'
+  });
+});
+
 app.get('/api', (req, res) => {
   res.json({
     message: 'ERP Contable API',
